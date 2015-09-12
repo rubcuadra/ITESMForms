@@ -13,7 +13,6 @@ class PreparatoriaForm(forms.ModelForm):
 
 	class Meta:
 		model = Alumno_Preparatoria
-		
 		exclude = ('',)
 		# fields
 
