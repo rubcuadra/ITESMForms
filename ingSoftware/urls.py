@@ -8,5 +8,7 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
+
     url(r'^preparatoria/$', contacto_views.PrepaView.as_view(), name='prepa-new'),
+    url(r'^profesional/$', contacto_views.ProfeView.as_view(), name='profe-new'),
 )

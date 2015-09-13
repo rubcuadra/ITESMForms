@@ -9,7 +9,7 @@ from . import forms as cForms
 # Create your views here.
 
 class PrepaView(View):
-    template_name = 'prepa.html'
+    template_name = 'preparatoria.html'
     def get(self, request):
         form = cForms.PreparatoriaForm()
         return render(request, self.template_name, locals())
@@ -25,6 +25,25 @@ class PrepaView(View):
 
     def dispatch(self, request, *args, **kwargs):
         return super(PrepaView, self).dispatch(request, *args, **kwargs)
+
+class ProfeView(View):
+    template_name='profesional.html'
+    def get(self, request):
+        form = cForms.ProfesionalForm()
+        return render(request, self.template_name, locals())
+
+    def post(self, request):
+        form = cForms.ProfesionalForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+        else:
+            return render(request, self.template_name, locals())
+
+    def dispatch(self, request, *args, **kwargs):
+        return super(ProfeView, self).dispatch(request, *args, **kwargs)
+
 
 def home(request):
     return render(
