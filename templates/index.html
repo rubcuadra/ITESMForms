@@ -3,20 +3,17 @@
 <head>
   {% load staticfiles %}
   <meta charset="UTF-8">
-  <title>Document</title>
+  <title>Registros</title>
   <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
   <link rel="stylesheet" href="{% static 'css/cover.css' %}">
 </head>
 <body>
 <div class="site-wrapper">
-
       <div class="site-wrapper-inner">
-
         <div class="cover-container">
-
           <div class="masthead clearfix">
             <div class="inner">
-              <h3 class="masthead-brand">ITESM</h3>
+              <h3 class="masthead-brand">ITESM CSF</h3>
               <nav>
                 <ul class="nav masthead-nav">
                         
@@ -24,10 +21,11 @@
               </nav>
             </div>
           </div>
-
           <div class="inner cover">
             <h1 class="cover-heading">Campus Santa fe</h1>
             <p class="lead">Bienvenido al Sistema de registro para nuevos ingresos del ITESM CSF</p>
+            <hr>
+            <p class="lead">Nuestro Objetivo es volver mas eficiente el sistema de inscripciones y registro de alumnos de nuevo ingreso en Campus Santa Fe</p>
             <p class="lead">
               <a href="{% url 'prepa-new' %}" class="btn btn-lg btn-default">Preparatoria</a>
               <a href="{% url 'profe-new' %}" class="btn btn-lg btn-default">Profesional</a>
