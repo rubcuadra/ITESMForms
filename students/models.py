@@ -136,7 +136,6 @@ class Alumno_Profesional(models.Model):
 	gender = models.CharField(max_length=1, choices=c.gen,verbose_name=u'Sexo: ')
 	birth_date = models.DateField(auto_now=False,verbose_name=u'Fecha de Nacimiento')
 	nationality = models.CharField(max_length=120,  verbose_name=u'Nacionalidad',blank=True) 
-	graduation_date = models.DateField(auto_now=False,verbose_name=u'Fecha de Graduacion ',blank=True)
 	lada_phone_number = models.CharField(max_length=3,verbose_name=u'Lada de Telefono de Casa',help_text='DF = 55')
 	phone_number = models.CharField(max_length=8, verbose_name=u'Telefono de Casa')
 	cellphone_number = models.CharField(max_length=10, verbose_name=u'Celular',blank=True)
@@ -150,10 +149,10 @@ class Alumno_Profesional(models.Model):
 	period = models.CharField(max_length=6, choices=c.periodos,verbose_name=u'Periodo: ')
 	facebook = models.CharField(max_length = 120, verbose_name=u'Facebook: ')
 	twitter = models.CharField(max_length = 120, verbose_name=u'Twitter')
-	prev_schools = models.CharField(max_length=120,choices=c.universidades, verbose_name=u'Nombre de Preparatoria') 
-	program = models.CharField(max_length=3, choices=c.carreras,verbose_name=u'Carrera de interes:')
-	program2 = models.CharField(max_length=3, choices=c.carreras,verbose_name=u'Carrera de interes 2:')
-	program3 = models.CharField(max_length=3, choices=c.carreras,verbose_name=u'Carrera de interes 3:')
+	prev_school = models.CharField(max_length=120,choices=c.universidades, verbose_name=u'Nombre de Preparatoria') 
+	program = models.CharField(max_length=3, choices=c.carreras,verbose_name=u'Carrera de interes:',default='')
+	program2 = models.CharField(max_length=3, choices=c.carreras,verbose_name=u'Carrera de interes 2:',blank=True)
+	program3 = models.CharField(max_length=3, choices=c.carreras,verbose_name=u'Carrera de interes 3:',blank=True)
 	
 	def getCSVLine(s):
 		params = (2, #CAMPUS
@@ -191,7 +190,7 @@ class Alumno_Profesional(models.Model):
 			'',#Insititucion Educativa 3
 			'',#Comentario +
 			'',#Clave origen 2
-			s.prev_schools,#Clave Escuela Procedencia +
+			s.prev_school,#Clave Escuela Procedencia +
 			s.average,
 			s.graduation_date,#Fecha Esperada Graduacion 
 			'PIS' if s.first_time else 'PIN',#Ingreso, Primer_Ingreso_Nivel
@@ -243,5 +242,5 @@ class Alumno_Profesional(models.Model):
 		return '%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s'%(params[0],params[1],params[2],params[3],params[4],params[5],params[6],params[7],params[8],params[9],params[10],params[11],params[12],params[13],params[14],params[15],params[16],params[17],params[18],params[19],params[20],params[21],params[22],params[23],params[24],params[25],params[26],params[27],params[28],params[29],params[30],params[31],params[32],params[33],params[34],params[35],params[36],params[37],params[38],params[39],params[40],params[41],params[42],params[43],params[44],params[45],params[46],params[47],params[48],params[49],params[50],params[51],params[52],params[53],params[54],params[55],params[56],params[57],params[58],params[59],params[60],params[61],params[62],params[63],params[64],params[65],params[66],params[67],params[68],params[69],params[70],params[71],params[72],params[73],params[74],params[75],params[76],params[77],params[78],params[79],params[80],params[81],params[82],params[83])
 
 	def __unicode__(self):
-		return self.complete_name
+		return self.name
 
