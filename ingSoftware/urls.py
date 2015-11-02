@@ -11,4 +11,5 @@ urlpatterns = patterns('',
 
     url(r'^preparatoria/$', contacto_views.PrepaView.as_view(), name='prepa-new'),
     url(r'^profesional/$', contacto_views.ProfeView.as_view(), name='profe-new'),
+    url(r'^success/$', contacto_views.SuccessView.as_view(), name='success'),
 )

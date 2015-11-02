@@ -12,7 +12,7 @@ class PreparatoriaForm(forms.ModelForm):
 
 	class Meta:
 		model = Alumno_Preparatoria
-		exclude = ('',)
+		exclude = ('date_of_registration',)
 		# fields
 class ProfesionalForm(forms.ModelForm):
 	options= (
