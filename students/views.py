@@ -43,7 +43,16 @@ class ProfeView(View):
 
     def dispatch(self, request, *args, **kwargs):
         return super(ProfeView, self).dispatch(request, *args, **kwargs)
+class SuccessView(View):
+    template_name='success.html'
+    def get(self, request):
+        return render(request, self.template_name, locals())
 
+    def post(self, request):
+        return render(request, self.template_name, locals())
+
+    def dispatch(self, request, *args, **kwargs):
+        return super(SuccessView, self).dispatch(request, *args, **kwargs)
 
 def home(request):
     return render(
