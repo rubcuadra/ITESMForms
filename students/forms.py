@@ -15,14 +15,7 @@ class PreparatoriaForm(forms.ModelForm):
 		exclude = ('date_of_registration',)
 		# fields
 class ProfesionalForm(forms.ModelForm):
-	options= (
-		('ITC', 'Ingenieria en Tecnologias Computacionales'),
-		('IMT','Ingenieria en Mecatronica'),
-		('IDS', 'Ingenieria en Desarollo Sustentable'),
-		('IMI', 'Ingenieria en Produccion Musical y Digital'),)
-
 	birth_date = forms.DateField(widget=SelectDateWidget(years = range(1980,2015)))
-	interests = forms.MultipleChoiceField(choices = options,widget=forms.CheckboxSelectMultiple())
 
 	def save(self,*args, **kwargs):
 		super(ProfesionalForm, self).save(*args, **kwargs)

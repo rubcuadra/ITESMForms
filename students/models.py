@@ -192,7 +192,7 @@ class Alumno_Profesional(models.Model):
 			'',#Clave origen 2
 			s.prev_school,#Clave Escuela Procedencia +
 			s.average,
-			s.graduation_date,#Fecha Esperada Graduacion 
+			'',#Fecha Esperada Graduacion 
 			'PIS' if s.first_time else 'PIN',#Ingreso, Primer_Ingreso_Nivel
 			'',#Padre Titulo Trato
 			'',#Padre Fallecido

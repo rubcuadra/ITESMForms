@@ -1,11 +1,13 @@
 from django.shortcuts import render, redirect
 from django.core.urlresolvers import reverse
 #from django.template.context_processors import csrf
-from .models import Alumno_Preparatoria
 from django.views.generic import View 
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
+from .models import Alumno_Preparatoria ,Alumno_Profesional
+from sender import MailSender
 from . import forms as cForms
+from . import constants as c
 # Create your views here.
 
 class PrepaView(View):
@@ -19,7 +21,7 @@ class PrepaView(View):
 
         if form.is_valid():
             form.save()
-            return redirect('home')
+            return redirect('success')
         else:
             return render(request, self.template_name, locals())
 
@@ -37,7 +39,7 @@ class ProfeView(View):
 
         if form.is_valid():
             form.save()
-            return redirect('home')
+            return redirect('success')
         else:
             return render(request, self.template_name, locals())
 
@@ -53,10 +55,34 @@ class SuccessView(View):
 
     def dispatch(self, request, *args, **kwargs):
         return super(SuccessView, self).dispatch(request, *args, **kwargs)
+class SenderView(View):
+    template_name='sender.html'
+    def get(self, request):
+        totalProfe=totalPrepa='?'
+        return render(request, self.template_name, locals())
 
+    def post(self, request):
+        totalProfe=Alumno_Profesional.objects.count()
+        totalPrepa=Alumno_Preparatoria.objects.count()
+        if request.POST.get('bttnPreparatoria') or request.POST.get('bttnProfesional'):
+            bttn = 3 if request.POST.get('bttnPreparatoria') else 5
+            mailer = MailSender(username=c.gmail_username,pwd=c.gmail_pwd,destinatary=c.destinatary,type=bttn)
+            topTenAlumnos = Alumno_Preparatoria.objects.all()[:10] if bttn is 3 else Alumno_Profesional.objects.all()[:10]
+            csv_report = open('report.csv','w+')
+            for alumno in topTenAlumnos:
+                csv_report.write(alumno.getCSVLine())
+                csv_report.write('\n')
+            csv_report.close()
+            mailer.attachCSV('report.csv')
+            mailer.sendMail()
+            del mailer
+            for alumno in topTenAlumnos:
+                alumno.delete()
+                pass
+            msg='Envio de alumnos de %s éxitoso!'%('Preparatoria' if bttn is 3 else 'Profesional')
+        return render(request, self.template_name, locals())
+
+    def dispatch(self, request, *args, **kwargs):
+        return super(SenderView, self).dispatch(request, *args, **kwargs)
 def home(request):
-    return render(
-        request,
-        'index.html',
-        {}
-    )
+    return render(request,'index.html',{})

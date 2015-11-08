@@ -1,5 +1,13 @@
 {% extends 'base.html' %}
 {% block content %}
-	<button>Obtener csv Profesional</button>
-	<button>Obtener csv Preparatoria</button>
+	<form method="POST">
+	{% csrf_token %}
+	<p name='tprepa' >Total de Alumnos de Preparatoria: {{totalPrepa}} </p>
+	<p name='tprofe' >Total de Alumnos de Profesional: {{totalProfe}} </p>
+	<button name='calculate' value='Calculate'>Calculate</button>
+	<button name='bttnProfesional' value='ObtainProfe'>Obtener csv Profesional</button>
+	<button name='bttnPreparatoria' value='ObtainPrepa'>Obtener csv Preparatoria</button>
+	<p name='msg' >{{msg}}</p> 
+	</form>
+
 {% endblock %}
