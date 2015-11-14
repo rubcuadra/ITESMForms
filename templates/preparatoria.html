@@ -1,8 +1,17 @@
 {% extends 'base.html' %}
 {% block content %}
-	<form method="POST">
+<div class="image-wrapper">
+	<a href="http://micampus.csf.itesm.mx/preparatoria" alt="prepa tec">prepa tec</a>
+</div>
+<div class="title">
+	<h2 class="text-center">Registro de nuevo ingreso.</h2>
+	<h6 class="text-center">Ingresa tu información y nos pondremos en contacto contigo</h6>
+</div>
+<form method="POST" class="registro-form prepa">
+	<ul class="form-list">
 		{% csrf_token %}
-		{{form.as_p}}
-		<button>Agregar</button>
-	</form>
+		{{ form.as_ul }}
+		<button>Registrarme</button>
+	</ul>
+</form>
 {% endblock %}
