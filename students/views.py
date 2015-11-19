@@ -1,3 +1,6 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
 from django.shortcuts import render, redirect
 from django.core.urlresolvers import reverse
 #from django.template.context_processors import csrf

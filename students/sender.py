@@ -7,7 +7,7 @@ from email.mime.text import MIMEText
 import constants as c
 class MailSender:
     def __init__(s, *args, **k): #You MUST pass username,pwd,destinatary and type
-        s.server = smtplib.SMTP(c.gmailServer)
+        s.server = smtplib.SMTP(c.gmailServer,587)
         s.server.ehlo()
         s.server.starttls()
         s.server.login(k['username'],k['pwd'])
