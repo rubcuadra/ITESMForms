@@ -14,7 +14,7 @@ class MailSender:
         s.message = MIMEMultipart()
         s.message['Subject'] = "Registros Preparatoria" if k['type'] is 3 else "Registros Profesional"
         s.message['From']= k['username']
-        s.message['To'] = ','.join(k['destinatary'])
+        s.message['To'] = k['destinatary']#','.join(k['destinatary'])
     def attachCSV(s, csvFile):
         report = open(csvFile,'r')
         s.message.attach(MIMEApplication(report.read(),Content_Disposition="attachment; filename='%s'"%basename(csvFile),Name=basename(csvFile)))
