@@ -189,6 +189,15 @@ h2,h6,h1,h3,h4,h5
     text-align: center;
 }
 
+a.small-link
+{
+    width: 100px;
+    display: block;
+    margin: 0 auto;
+    color: white;
+    text-decoration: underline;
+}
+
 .title.success
 {
 	margin: 45px 0;
